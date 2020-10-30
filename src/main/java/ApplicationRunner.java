@@ -10,6 +10,7 @@ public class ApplicationRunner {
 
     private static int q =10;
 
+    int x = 10;
     private static double[] ACCURACIES = new double[]{
             1e-1,
             1e-2,
