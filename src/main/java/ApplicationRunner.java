@@ -8,6 +8,8 @@ public class ApplicationRunner {
     /* Номер варианта */
     private static final int p = 7;
 
+    private static int q =10;
+
     private static double[] ACCURACIES = new double[]{
             1e-1,
             1e-2,
