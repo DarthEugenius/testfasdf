@@ -1,4 +1,4 @@
-package benchmark.executor;
+package benchmark.executors;
 
 import benchmark.handlers.IntegrateMethodBenchmarkConfigurator;
 import benchmark.handlers.IntegrationBenchmarkConfigurator;

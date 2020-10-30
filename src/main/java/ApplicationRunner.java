@@ -1,4 +1,4 @@
-import benchmark.executor.ClassesCollectorForEachIntegrateMethodBenchmark;
+import benchmark.executors.ClassesCollectorForEachIntegrateMethodBenchmark;
 import benchmark.handlers.IntegrateMethodBenchmarkConfigurator;
 import infrastructure.ClassesCollectorForBenchmark;
 import infrastructure.UniVariableRealFunctionIntegrator;
