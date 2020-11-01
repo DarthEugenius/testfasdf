@@ -1,6 +1,6 @@
 package methods;
 
-import infrastructure.UniVariableRealFunction;
+import entity.UniVariableRealFunction;
 
 public class MiddleRectanglesIntegrator extends AbstractAccuracyIntegrator {
 

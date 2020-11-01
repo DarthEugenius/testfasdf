@@ -1,22 +1,34 @@
 package methods;
 
-import infrastructure.UniVariableRealFunction;
-import infrastructure.UniVariableRealFunctionIntegrator;
+import entity.UniVariableRealFunction;
+import entity.UniVariableRealFunctionIntegrator;
 
 public abstract class AbstractAccuracyIntegrator implements UniVariableRealFunctionIntegrator {
 
     @Override
-    public double integrate(double accuracy, UniVariableRealFunction function, double integrateFrom, double integrateTo) {
-        int counter = 1;
-        while(
-                Math.abs(integrate(counter, function, integrateFrom, integrateTo)
-                                -
-                                integrate(counter + 1, function, integrateFrom, integrateTo))
-                        >
-                        accuracy
+    public double integrate(double accuracy,
+                            UniVariableRealFunction function,
+                            double integrateFrom,
+                            double integrateTo) {
+        return integrate(1, accuracy, function, integrateFrom, integrateTo);
+    }
+
+    @Override
+    public double integrate(int iterations,double accuracy,
+                            UniVariableRealFunction function,
+                            double integrateFrom,
+                            double integrateTo) {
+        int counter = iterations;
+        double previousIntegralValue = integrate(counter, function, integrateFrom, integrateTo);
+        while (Math.abs(
+                integrate(2 * counter, function, integrateFrom, integrateTo)
+                        -
+                        previousIntegralValue)
+                > accuracy
         ) {
-            counter++;
+            previousIntegralValue = integrate(2 * counter, function, integrateFrom, integrateTo);
+            counter *= 2;
         }
-        return integrate(counter + 1, function, integrateFrom, integrateTo);
+        return integrate(counter, function, integrateFrom, integrateTo);
     }
 }

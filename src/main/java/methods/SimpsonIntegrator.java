@@ -1,9 +1,8 @@
 package methods;
 
-import infrastructure.UniVariableRealFunction;
+import entity.UniVariableRealFunction;
 
 public class SimpsonIntegrator extends AbstractAccuracyIntegrator {
-
 
     /* TODO ПРОЧЕКАТЬ */
     @Override
