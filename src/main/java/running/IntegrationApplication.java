@@ -7,6 +7,7 @@ import processors.methods.MethodProcessor;
 
 import java.util.List;
 
+/// FIXME: 02.11.2020 Убрать овнокод
 public class IntegrationApplication {
 
     private static final AllInheritedClassesInstancesFactory factory = new AllInheritedClassesInstancesFactory();
