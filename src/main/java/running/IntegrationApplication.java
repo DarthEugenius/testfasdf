@@ -1,5 +1,6 @@
 package running;
 
+import entity.UniVariableRealFunction;
 import entity.UniVariableRealFunctionIntegrator;
 import infrastructure.factories.AllInheritedClassesInstancesFactory;
 import processors.methods.MethodProcessor;
@@ -8,21 +9,50 @@ import java.util.List;
 
 public class IntegrationApplication {
 
-    public static void run() {
-        final AllInheritedClassesInstancesFactory factory = new AllInheritedClassesInstancesFactory();
+    private static final AllInheritedClassesInstancesFactory factory = new AllInheritedClassesInstancesFactory();
 
-        List<UniVariableRealFunctionIntegrator> integrators = factory
-                .getClassesInstancesBySuperClassOrInterface(UniVariableRealFunctionIntegrator.class);
+    private static final List<UniVariableRealFunctionIntegrator> integrators = factory
+            .getClassesInstancesBySuperClassOrInterface(UniVariableRealFunctionIntegrator.class);
 
-        List<MethodProcessor> processors = factory.getClassesInstancesBySuperClassOrInterface(MethodProcessor.class);
+    private static final List<MethodProcessor> processors = factory.getClassesInstancesBySuperClassOrInterface(MethodProcessor.class);
 
+    public static void run(int iterations,
+                           UniVariableRealFunction function,
+                           double integrateFrom,
+                           double integrateTo) {
         integrators.forEach(integrator -> {
             processors.forEach(MethodProcessor::processBeforeMethodInvocation);
                 System.out.println("Implementation class: " + integrator.getClass());
-                System.out.println("Integral value: " + integrator.integrate(10, 0.0000001, Math::cos, 0, 1));
+                System.out.println("Integral value: " + integrator.integrate(iterations, function, integrateFrom, integrateTo));
             processors.forEach(MethodProcessor::processAfterMethodInvocation);
             System.out.println();
+        });
+    }
 
+    public static void run(double accuracy,
+                           UniVariableRealFunction function,
+                           double integrateFrom,
+                           double integrateTo) {
+        integrators.forEach(integrator -> {
+            processors.forEach(MethodProcessor::processBeforeMethodInvocation);
+            System.out.println("Implementation class: " + integrator.getClass());
+            System.out.println("Integral value: " + integrator.integrate(accuracy, function, integrateFrom, integrateTo));
+            processors.forEach(MethodProcessor::processAfterMethodInvocation);
+            System.out.println();
+        });
+    }
+
+    public static void run(int iterations,
+                           double accuracy,
+                           UniVariableRealFunction function,
+                           double integrateFrom,
+                           double integrateTo) {
+        integrators.forEach(integrator -> {
+            processors.forEach(MethodProcessor::processBeforeMethodInvocation);
+            System.out.println("Implementation class: " + integrator.getClass());
+            System.out.println("Integral value: " + integrator.integrate(iterations, accuracy, function, integrateFrom, integrateTo));
+            processors.forEach(MethodProcessor::processAfterMethodInvocation);
+            System.out.println();
         });
     }
 }
