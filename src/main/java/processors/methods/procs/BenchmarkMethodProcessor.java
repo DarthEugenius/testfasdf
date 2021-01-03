@@ -2,6 +2,7 @@ package processors.methods.procs;
 
 import processors.methods.MethodProcessor;
 
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class BenchmarkMethodProcessor implements MethodProcessor {
@@ -16,6 +17,10 @@ public class BenchmarkMethodProcessor implements MethodProcessor {
     @Override
     public void processAfterMethodInvocation() {
         long benchmarkEndTime = System.nanoTime();
-        System.out.println("Benchmark time: " + (benchmarkEndTime - this.startTime.get()));
+        double executingTime = TimeUnit.NANOSECONDS.toNanos(benchmarkEndTime - this.startTime.get());
+        System.out.println("Executing time: " + executingTime / 1000000000 + " seconds");
+
     }
+
+
 }

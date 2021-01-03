@@ -12,4 +12,5 @@ public interface MethodProcessor extends Processor {
     void processBeforeMethodInvocation();
 
     void processAfterMethodInvocation();
+
 }

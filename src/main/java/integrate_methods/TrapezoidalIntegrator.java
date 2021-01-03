@@ -1,8 +1,8 @@
-package methods;
+package integrate_methods;
 
 import entity.UniVariableRealFunction;
 
-public class UpperRectanglesIntegrator extends AbstractAccuracyIntegrator {
+public class TrapezoidalIntegrator extends AbstractAccuracyIntegrator {
 
     @Override
     public double integrate(int iterations, UniVariableRealFunction function, double integrateFrom, double integrateTo) {
@@ -15,11 +15,7 @@ public class UpperRectanglesIntegrator extends AbstractAccuracyIntegrator {
             double currentX = integrateFrom + i * delta;
             double nextX = integrateFrom + (i + 1) * delta;
 
-            if (function.value(currentX) > function.value(nextX)) {
-                integralValue += function.value(currentX) * delta;
-            } else {
-                integralValue += function.value(nextX) * delta;
-            }
+            integralValue += (function.value(currentX) + function.value(nextX)) / 2 * delta;
         }
         return integralValue;
     }

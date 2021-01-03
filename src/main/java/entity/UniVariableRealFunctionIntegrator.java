@@ -11,8 +11,5 @@ public interface UniVariableRealFunctionIntegrator {
 
     double integrate(double accuracy, UniVariableRealFunction function, double integrateFrom, double integrateTo);
 
-    /*
-     *  ???
-     */
     double integrate(int iterations, double accuracy, UniVariableRealFunction function, double integrateFrom, double integrateTo);
 }

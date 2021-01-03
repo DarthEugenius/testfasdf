@@ -1,4 +1,4 @@
-package methods;
+package integrate_methods;
 
 import entity.UniVariableRealFunction;
 import entity.UniVariableRealFunctionIntegrator;
@@ -14,21 +14,24 @@ public abstract class AbstractAccuracyIntegrator implements UniVariableRealFunct
     }
 
     @Override
-    public double integrate(int iterations,double accuracy,
+    public double integrate(int iterations, double accuracy,
                             UniVariableRealFunction function,
                             double integrateFrom,
                             double integrateTo) {
         int counter = iterations;
         double previousIntegralValue = integrate(counter, function, integrateFrom, integrateTo);
+        double currentIntegralValue = integrate(2 * counter, function, integrateFrom, integrateTo);
         while (Math.abs(
-                integrate(2 * counter, function, integrateFrom, integrateTo)
+                        currentIntegralValue
                         -
                         previousIntegralValue)
                 > accuracy
         ) {
-            previousIntegralValue = integrate(2 * counter, function, integrateFrom, integrateTo);
+
+            previousIntegralValue = currentIntegralValue;
             counter *= 2;
+            currentIntegralValue = integrate(2 * counter, function, integrateFrom, integrateTo);
         }
-        return integrate(counter, function, integrateFrom, integrateTo);
+        return previousIntegralValue;
     }
 }
