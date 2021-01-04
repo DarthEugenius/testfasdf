@@ -8,7 +8,7 @@ public class Utils {
             double startOfSegment,
             double endOfSegment,
             int amountOfSegments) {
-        double[] x = getArrayOfArguments(startOfSegment, endOfSegment, amountOfSegments);
+        double[] x = getArrayOfArguments(startOfSegment, endOfSegment, amountOfSegments - 1);
         return getArrayOfValuesOfUniVariableRealFunction(function, x);
     }
 
@@ -29,11 +29,23 @@ public class Utils {
     public static double[] getArrayOfArguments(double startOfSegment,
                                                double endOfSegment,
                                                int amountOfSegments) {
+        double[] x = new double[amountOfSegments];
+        double dx = (endOfSegment - startOfSegment) / (amountOfSegments - 1);
+        x[0] = startOfSegment;
+        for (int i = 1; i < amountOfSegments; i++) {
+            x[i] = x[i - 1] + dx;
+        }
+        return x;
+    }
+
+    public static double[] getArrayOfArguments(double startOfSegment,
+                                               double endOfSegment,
+                                               double step) {
+        int amountOfSegments = (int) ((endOfSegment - startOfSegment) / step);
         double[] x = new double[amountOfSegments + 1];
-        double dx = (endOfSegment - startOfSegment) / amountOfSegments;
         x[0] = startOfSegment;
         for (int i = 1; i <= amountOfSegments; i++) {
-            x[i] = x[i - 1] + dx;
+            x[i] = x[i - 1] + step;
         }
         return x;
     }

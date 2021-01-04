@@ -1,0 +1,276 @@
+\documentclass[a4paper,12pt]{extarticle}
+% !TEX encoding = IBM866
+\usepackage[utf8]{inputenc}
+\usepackage[T2A]{fontenc}
+\usepackage{listings}
+\usepackage[cp866]{inputenc}
+\usepackage{amsthm,amsmath,amsfonts}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{algorithm2e}
+\usepackage{array}
+\usepackage[final]{graphicx}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{moreverb}
+\usepackage{multirow}
+\usepackage[cp866]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{amsthm,amsmath,amsfonts,amssymb}
+\usepackage[final]{graphicx}
+\usepackage{float}
+\usepackage{geometry}
+\usepackage{subcaption}
+\usepackage{colortbl}
+\geometry
+{
+a4paper,
+total={210mm,297mm},
+left=20mm,
+right=20mm,
+top=25mm,
+bottom=20mm,
+}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage[final]{showkeys}
+
+\usepackage{caption}
+\DeclareCaptionLabelSeparator{dot}{. }
+\captionsetup{labelsep=dot}
+
+\usepackage{hyperref}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{python}
+\usepackage{listings}
+\lstloadlanguages{Java}
+\usepackage{bm}
+
+
+
+\begin{document}
+
+
+    \begin{titlepage}
+
+        \begin{center}
+            \centerline{\Large\rm Министерство науки и высшего образования}
+            \centerline{\Large\rm Федеральное государственное бюджетное образовательное}
+            \centerline{\Large\rm учреждение высшего образования}
+            \centerline{\Large\rm <<Московский государственный технический университет}
+            \centerline{\Large\rm имени~Н.~Э.~Баумана}
+            \centerline{\Large\rm (национальный исследовательский университет)>>}
+            \centerline{\Large\rm (МГТУ~им.~Н.~Э.~Баумана)}
+            \hrulefill
+        \end{center}
+
+        \begin{figure}[h!]
+            \centering
+%			\includegraphics[height=0.4\linewidth]{picture.0}
+        \end{figure}
+
+        \begin{center}
+            \centerline{\Large\rm Факультет <<Фундаментальные науки>>}
+            \centerline{\Large\rm Кафедра ФН1 <<Высшая математика>>}
+            \centerline{\Large\rm Дисциплина <<Методы вычислений>>}
+        \end{center}
+
+        \begin{center}
+            \textsc{\textbf{\Huge Отчет}}\\
+            \textsc{\textbf{\large по лабораторной работе №5}}\\
+            \textsc{\textbf{\large Численное решение задачи Коши}}\\
+        \end{center}
+
+        \vspace{3em}
+
+        {
+        \large
+        \hbox to 17cm {Преподаватель \hspace{45pt} \hrulefill \hspace{60pt} Коновалов~Я.~Ю.}
+        \vspace{-7pt}
+        \hbox{{\small\it \hspace{178pt} подпись, инициалы}}
+        \hbox{}
+        \hbox to 17cm {Студенты группы ФН1--51Б \hrulefill \hspace{1pt} Терновой~Е.~А. и Гончаров~М.~В.}
+        \vspace{-7pt}
+        \hbox{{\small\it \hspace{178pt} подпись, инициалы}}
+        }
+
+
+        \vspace{\fill}
+
+        \begin{center}
+            \large	Москва \\2020
+        \end{center}
+
+    \end{titlepage}
+
+    \setcounter{page}{2}
+    \tableofcontents
+    \vspace{\baselineskip}
+
+
+    \newpage
+    \section{Задание}
+    Методами Эйлера и Рунге--Кутты (2-го, 4-го и 6-го порядков) найти численное решение задачи Коши на отрезке $\left [ x_{0}; x_{0} + 0.5 \right ]$ с шагом $h = 0.05$ и оценить погрешность решения. \\
+    \begin{equation}\label{eq:01}
+    \begin{gathered}
+        y' = 3 e^{-x} - 2y^{2} \\
+        y(0) = 1
+    \end{gathered}
+    \end{equation}
+    Данное дифференциальное уравнение не разрешимо в квадратурах (оно является частным случаем уравнения Рикатти) \newline
+    Численным решением будем называть набор пар чисел $(x_{i},y_{i}), i=\overline{0,n}$ \newline таких, что в точках разбиения $y_{i}\approx \varphi (x_{i}), i=\overline{1,n}$, где $\varphi (x)$ -- решение уравнения.
+
+    \section{Теория}
+
+    \subsection{Метод Рунге--Кутты 4--го порядка}
+    Рассмотрим задачу Коши для системы обыкновенных дифференциальных уравнений первого порядка.
+
+    \[
+        y' = f(x,y), \qquad y(x_0) = y_0
+    \]
+
+    \noindent
+    Тогда приближенное значение в последующих точках вычисляется по следующей итерационной формуле:
+
+    \[
+        y_{n+1} = y_n + \dfrac{h}{6}(k_1 + 2k_2 + 2k_3 + k_4)
+    \]
+
+    \noindent
+    Вычисление нового значения проходит в 4 соответствующих этапа:
+
+    \[
+        k_1 = f(x_n, y_n), k_2 = f(x_n + \frac{h}{2}, y_n + \frac{h}{2}k_1), k_3 = f(x_n + \frac{h}{2}, y_n + \frac{h}{2}k_2), 	k_4 = f(x_n + h, y_n + hk_3),
+    \]
+
+    \noindent
+    где $h$ -- величина шага сетки по $x$. \\
+    Этот метод имеет четвёртый порядок точности. Это значит, что ошибка на одном шаге имеет порядок $O(h^5)$, а суммарная ошибка на конечном интервале интегрирования имеет порядок $O(h^4)$.
+
+    \subsection{Метод Эйлера}
+    Пусть дана задача Коши для уравнения первого порядка:
+
+    \[
+        \dfrac{dy}{dx} = f(x, y), \qquad y(x_0) = y_0,
+    \]
+
+    \noindent
+    где $f$ -- функция, определенная на некоторой области $D \subset \mathbb{R}^2$. Решение ищется на интервале $(x_0, b]$. На этом интервале введем узлы: $x_0 < x_1 < ... < x_n = b$. Приближенное решение в узлах $x_i$, которое мы обозначим как $y_i$, определяется следующим образом:
+
+    \[
+        y_i = y_{i-1} + (x_i - x_{i-1})f(x_{i-1}, y_{i-1}), i = \overline{1,n}
+    \]
+
+    \noindent
+    Эти формулы непосредственно обобщаются на случай систем обыкновенных дифференциальных уравнений.
+
+    \section{Листинг кода}
+    \subsection{Метод Эйлера}
+    \listinginput[1]{1}{EulerMethod.java}
+
+    \subsection{Метод Рунге-Кутты 2-ого порядка}
+    \listinginput[1]{1}{RungeKuttaMethodSecondOrder.java}
+    \subsection{Метод Рунге-Кутты 4-ого порядка}
+    \listinginput[1]{1}{RungeKuttaMethodFourthOrder.java}
+    \subsection{Метод Рунге-Кутты 6-ого порядка}
+    \listinginput[1]{1}{RungeKuttaMethodSixthOrder.java}
+
+
+    \section{Результаты работы программы}
+
+    \subsection{Графическое представление решений}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.8\linewidth]{differentialEquationSolutions.png}
+        \caption{Решение задачи }
+        \label{fig:result3}
+    \end{figure}
+    \subsection{Результаты вычислений методом Эйлера}
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|l|l|}
+            \hline
+            \multicolumn{1}{|c|}{x} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Численное решение \\в точке x\end{tabular}} \\
+            \hline0,000 & 1,0000000000000000 \\ \hline
+            0,050 & 1,0500000000000000 \\ \hline
+            0,100 & 1,0824344136751072 \\ \hline
+            0,150 & 1,1009936003896839 \\ \hline
+            0,200 & 1,1088811060435386 \\ \hline
+            0,250 & 1,1087289882712017 \\ \hline
+            0,300 & 1,1026211087886242 \\ \hline
+            0,350 & 1,0921665109362564 \\ \hline
+            0,400 & 1,0785869556329960 \\ \hline
+            0,450 & 1,0627999804521764 \\ \hline
+            0,500 & 1,0454898233505276 \\ \hline
+        \end{tabular}
+    \end{table}
+    \newline \begin{center}Погрешность на шаге: 7,69e-02\end{center}
+
+    \subsection{Результаты вычислений методом Рунге-Кутты 2-ого порядка}
+
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|l|l|}
+            \hline
+            \multicolumn{1}{|c|}{x} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Численное решение \\в точке x\end{tabular}} \\
+            \hline0,000 & 1,0000000000000000 \\ \hline
+            0,050 & 1,0220779956014165 \\ \hline
+            0,100 & 1,0386994311833170 \\ \hline
+            0,150 & 1,0505301560812343 \\ \hline
+            0,200 & 1,0581806975130859 \\ \hline
+            0,250 & 1,0622043008612216 \\ \hline
+            0,300 & 1,0630975396308784 \\ \hline
+            0,350 & 1,0613026629228222 \\ \hline
+            0,400 & 1,0572110327389799 \\ \hline
+            0,450 & 1,0511671655413364 \\ \hline
+            0,500 & 1,0434730271452333 \\ \hline
+        \end{tabular}
+    \end{table}
+    \newline \begin{center}Погрешность на шаге: 1,02e-03\end{center}
+
+    \subsection{Результаты вычислений методом Рунге-Кутты 4-ого порядка}
+
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|l|l|}
+            \hline
+            \multicolumn{1}{|c|}{x} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Численное решение \\в точке x\end{tabular}} \\
+            \hline0,000 & 1,0000000000000000 \\ \hline
+            0,050 & 1,0418016560727974 \\ \hline
+            0,100 & 1,0693239345290630 \\ \hline
+            0,150 & 1,0854513014222398 \\ \hline
+            0,200 & 1,0926372812993896 \\ \hline
+            0,250 & 1,0929019278642773 \\ \hline
+            0,300 & 1,0878711170888098 \\ \hline
+            0,350 & 1,0788328957348436 \\ \hline
+            0,400 & 1,0667964934922418 \\ \hline
+            0,450 & 1,0525467013881260 \\ \hline
+            0,500 & 1,0366906489218066 \\ \hline
+        \end{tabular}
+    \end{table}
+    \newline \begin{center}Погрешность на шаге: 1,68e-05\end{center}
+
+    \subsection{Результаты вычислений методом Рунге-Кутты 6-ого порядка}
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|l|l|}
+            \hline
+            \multicolumn{1}{|c|}{x} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Численное решение \\в точке x\end{tabular}} \\
+            \hline0,000 & 1,0000000000000000 \\ \hline
+            0,050 & 1,0418033399169104 \\ \hline
+            0,100 & 1,0693266564333310 \\ \hline
+            0,150 & 1,0854545544953400 \\ \hline
+            0,200 & 1,0926407004026488 \\ \hline
+            0,250 & 1,0929052706911342 \\ \hline
+            0,300 & 1,0878742373860015 \\ \hline
+            0,350 & 1,0788357168714260 \\ \hline
+            0,400 & 1,0667989861403204 \\ \hline
+            0,450 & 1,0525488663467981 \\ \hline
+            0,500 & 1,0366925047348436 \\ \hline
+        \end{tabular}
+    \end{table}
+    \newline \begin{center}Погрешность на шаге: 5,01e-08\end{center}
+
+\end{document}
