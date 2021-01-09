@@ -1,12 +1,11 @@
 package interpolation_method;
 
 import entity.UniVariableRealFunction;
-import org.apache.commons.math3.util.FastMath;
 import util.Utils;
 
-public class LagrangeInterpolation extends AbstractInterpolator {
+public class LagrangeInterpolation extends AbstractApproximator {
     @Override
-    public double[] interpolate(UniVariableRealFunction function,
+    public double[] approximate(UniVariableRealFunction function,
                                 double startOfSegment,
                                 double endOfSegment,
                                 int amountOfNodes) {
@@ -26,11 +25,11 @@ public class LagrangeInterpolation extends AbstractInterpolator {
                         function,
                         x);
         this.valuesOfFunctionInNodes = y;
-        return interpolate(y, x);
+        return approximate(y, x);
     }
 
     @Override
-    public double[] interpolate(double[] valuesOfFunction,
+    public double[] approximate(double[] valuesOfFunction,
                                 double[] valuesOfArgument) {
         this.resultFunction = x -> {
             double result = 0.0;

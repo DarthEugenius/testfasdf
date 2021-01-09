@@ -1,14 +1,12 @@
 package interpolation_method;
 
 import entity.UniVariableRealFunction;
-import org.apache.commons.math3.analysis.interpolation.SplineInterpolator;
-import org.apache.commons.math3.analysis.polynomials.PolynomialSplineFunction;
 import util.Utils;
 
-public class SplineInterpolationMethod extends AbstractInterpolator {
+public class SplineInterpolationMethod extends AbstractApproximator {
 
     @Override
-    public double[] interpolate(UniVariableRealFunction function,
+    public double[] approximate(UniVariableRealFunction function,
                                 double startOfSegment,
                                 double endOfSegment,
                                 int amountOfNodes) {
@@ -26,11 +24,11 @@ public class SplineInterpolationMethod extends AbstractInterpolator {
                         function,
                         this.nodes);
 
-        return interpolate(this.valuesOfFunctionInNodes, this.nodes);
+        return approximate(this.valuesOfFunctionInNodes, this.nodes);
     }
 
     @Override
-    public double[] interpolate(
+    public double[] approximate(
             double[] valuesOfFunction,
             double[] valuesOfArgument) {
         /*SplineInterpolator interpolator = new SplineInterpolator();

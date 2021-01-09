@@ -6,13 +6,13 @@ import solve_system_of_linear_equations.GaussMethodDoubleImpl;
 import util.Utils;
 
 
-public class LeastSquaresMethod extends AbstractInterpolator {
+public class LeastSquaresMethod extends AbstractApproximator {
     // TODO
     public static final int POWER = 4;
 
 
     @Override
-    public double[] interpolate(UniVariableRealFunction function,
+    public double[] approximate(UniVariableRealFunction function,
                                 double startOfSegment,
                                 double endOfSegment,
                                 int amountOfNodes) {
@@ -21,7 +21,7 @@ public class LeastSquaresMethod extends AbstractInterpolator {
                 endOfSegment,
                 amountOfNodes
         );
-        return interpolate(
+        return approximate(
                 Utils.getArrayOfValuesOfUniVariableRealFunction(
                         function,
                         this.nodes
@@ -31,7 +31,7 @@ public class LeastSquaresMethod extends AbstractInterpolator {
     }
 
     @Override
-    public double[] interpolate(
+    public double[] approximate(
             double[] valuesOfFunction,
             double[] valuesOfArgument) {
         double[] xOriginal = Utils.getArrayOfArguments(

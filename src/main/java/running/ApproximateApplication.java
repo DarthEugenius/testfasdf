@@ -2,7 +2,7 @@ package running;
 
 import entity.UniVariableRealFunction;
 import infrastructure.factories.AllInheritedClassesInstancesFactory;
-import interpolation_method.AbstractInterpolator;
+import interpolation_method.AbstractApproximator;
 import org.apache.commons.math3.util.FastMath;
 import org.knowm.xchart.*;
 import org.knowm.xchart.style.markers.SeriesMarkers;
@@ -14,12 +14,12 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class InterpolationApplication {
+public class ApproximateApplication {
     private static final AllInheritedClassesInstancesFactory factory = new AllInheritedClassesInstancesFactory();
     private static final int AMOUNT_OF_SEGMENTS_PLOTS = 10000;
 
-    private static final List<AbstractInterpolator> INTERPOLATORS = factory
-            .getClassesInstancesBySuperClassOrInterface(AbstractInterpolator.class);
+    private static final List<AbstractApproximator> INTERPOLATORS = factory
+            .getClassesInstancesBySuperClassOrInterface(AbstractApproximator.class);
 
     public static void run(
             UniVariableRealFunction function,
@@ -29,7 +29,7 @@ public class InterpolationApplication {
     ) {
         INTERPOLATORS.forEach(uniVariableRealFunctionInterpolator -> {
             long startTime = System.nanoTime();
-            uniVariableRealFunctionInterpolator.interpolate(
+            uniVariableRealFunctionInterpolator.approximate(
                     function,
                     startOfSegment,
                     endOfSegment,

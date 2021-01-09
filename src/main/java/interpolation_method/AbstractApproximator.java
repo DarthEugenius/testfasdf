@@ -1,11 +1,11 @@
 package interpolation_method;
 
 import entity.UniVariableRealFunction;
-import entity.UniVariableRealFunctionInterpolator;
+import entity.UniVariableRealFunctionApproximator;
 import org.apache.commons.math3.util.FastMath;
 
-public abstract class AbstractInterpolator
-        implements UniVariableRealFunctionInterpolator {
+public abstract class AbstractApproximator
+        implements UniVariableRealFunctionApproximator {
     int amountOfNodes = 0;
     public UniVariableRealFunction resultFunction;
     double[] valuesOfInterpolatedFunction;

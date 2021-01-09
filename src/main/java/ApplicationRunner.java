@@ -1,11 +1,5 @@
-import entity.UniVariableRealFunction;
-import interpolation_method.LagrangeInterpolation;
 import org.apache.commons.math3.util.FastMath;
-import running.DifferentialEquationsApplication;
-import running.FindExtremaApplication;
-import running.InterpolationApplication;
-
-import java.util.concurrent.TimeUnit;
+import running.ApproximateApplication;
 
 public class ApplicationRunner {
 
@@ -29,7 +23,7 @@ public class ApplicationRunner {
         );
         */
 
-        InterpolationApplication.run(
+        ApproximateApplication.run(
                 (x) -> FastMath.sqrt(2 * x + 1) - FastMath.sin(5 * x - FastMath.PI / 6),
                 -0.5,
                 5,
