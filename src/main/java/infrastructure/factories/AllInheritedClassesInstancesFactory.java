@@ -7,6 +7,9 @@ import java.util.stream.Collectors;
 
 /**
  * A factory class, which can create instances out of classes, inherited from a given class or an interface.
+ *
+ * @author Evgeniy Ternovoy
+ * @author Mihail Goncharov
  */
 public class AllInheritedClassesInstancesFactory implements InstanceCreator {
 
@@ -18,7 +21,7 @@ public class AllInheritedClassesInstancesFactory implements InstanceCreator {
         final FullyImplementedTypedClassesCollector<T> collector = new FullyImplementedTypedClassesCollector<>();
 
         return collector.getClassesBySuperclassOrAnInterface(zuper).stream()
-        .map(this::createInstance).collect(Collectors.toList());
+                .map(this::createInstance).collect(Collectors.toList());
     }
 
     @Override

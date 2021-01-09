@@ -1,12 +1,13 @@
 package integrate_methods;
 
 import entity.UniVariableRealFunction;
+import org.apache.commons.math3.util.FastMath;
 
 public class TrapezoidalIntegrator extends AbstractAccuracyIntegrator {
 
     @Override
     public double integrate(int iterations, UniVariableRealFunction function, double integrateFrom, double integrateTo) {
-        final double delta = Math.abs(integrateFrom - integrateTo) / iterations;
+        final double delta = FastMath.abs(integrateFrom - integrateTo) / iterations;
 
         double integralValue = 0.000000000000000000000000000000000000000000000000;
 

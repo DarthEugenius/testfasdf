@@ -4,6 +4,7 @@ import com.sun.prism.BasicStroke;
 import entity.CauchyProblemSolver;
 import entity.TwoVariablesRealFunction;
 import infrastructure.factories.AllInheritedClassesInstancesFactory;
+import org.apache.commons.math3.util.FastMath;
 import org.knowm.xchart.*;
 import org.knowm.xchart.style.Styler;
 import org.knowm.xchart.style.markers.Marker;
@@ -68,9 +69,9 @@ public class DifferentialEquationsApplication {
                     );
                     double errorOnStep = 0.0;
                     for (int i = 0; i < solutionWithBiggerStep.length; i++) {
-                        errorOnStep += Math.abs(solutionWithBiggerStep[i] - solution[2 * i]);
+                        errorOnStep += FastMath.abs(solutionWithBiggerStep[i] - solution[2 * i]);
                     }
-                    errorOnStep /= Math.pow(2, cauchyProblemSolver.getOrder()) - 1;
+                    errorOnStep /= FastMath.pow(2, cauchyProblemSolver.getOrder()) - 1;
                     System.out.println(cauchyProblemSolver.toString() + "\nexecuting time: " + executingTime / 1000000000 + " seconds\n");
                     XYSeries currentSeries = chart.addSeries(
                             cauchyProblemSolver.toString(),

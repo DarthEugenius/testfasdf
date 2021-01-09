@@ -2,6 +2,7 @@ package find_zeros_method;
 
 import entity.UniVariableRealFunction;
 import entity.UniVariableRealFunctionZeroFinder;
+import org.apache.commons.math3.util.FastMath;
 
 public class NewtonMethod extends IterationsCounter
         implements UniVariableRealFunctionZeroFinder {
@@ -23,7 +24,7 @@ public class NewtonMethod extends IterationsCounter
         UniVariableRealFunction derivative = x -> derivativeAtPoint(function, x);
         double zeroOfFunction = startOfSegment -
                 function.value(startOfSegment) / derivative.value(startOfSegment);
-        while (Math.abs(zeroOfFunction - startOfSegment) > epsilon) {
+        while (FastMath.abs(zeroOfFunction - startOfSegment) > epsilon) {
             startOfSegment = zeroOfFunction;
             zeroOfFunction =
                     startOfSegment -

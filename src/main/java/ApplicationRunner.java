@@ -1,54 +1,64 @@
 import entity.UniVariableRealFunction;
+import interpolation_method.LagrangeInterpolation;
+import org.apache.commons.math3.util.FastMath;
 import running.DifferentialEquationsApplication;
+import running.FindExtremaApplication;
+import running.InterpolationApplication;
+
+import java.util.concurrent.TimeUnit;
 
 public class ApplicationRunner {
 
     public static void main(String[] args) {
-
-
+        /*
         DifferentialEquationsApplication.run(
-                (x, y) -> 3 * Math.exp(-x) - 2 * Math.pow(y, 2),
+                // dy/dx = f(x, y) =
+                (x, y) -> x * x - y * y,
+
+                // x_0 =
                 0,
+
+                // y_0 = y(x_0) =
                 1,
+
+                // x1 =
                 0.5,
+
+                // h =
                 0.01
         );
+        */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /* UniVariableRealFunction function = x -> Math.sqrt(9 * x - 2) + Math.sin(3 * x + Math.PI/3);*//*
-        UniVariableRealFunction function = x -> Math.asin(2 * x - 1);
         InterpolationApplication.run(
-                function,
-                0,
-                1,
-                8
+                (x) -> FastMath.sqrt(2 * x + 1) - FastMath.sin(5 * x - FastMath.PI / 6),
+                -0.5,
+                5,
+                7
         );
-*/
 
-        /* FindZerosOfUniVariableRealFunctionApplication.run(
-                x -> x * (x - 4) * (x - 3),
-                -2,
-                1,
-                1e-10
-        );*/
+        /*
+        for (int i = 0; i < 1; i++) {
+            long startTime = System.nanoTime();
+            new LagrangeInterpolation().interpolate(
+                    x -> FastMath.sqrt(2 * x + 1) - FastMath.sin(5 * x - FastMath.PI / 6),
+                    0,
+                    5,
+                    7
+            );
+            long benchmarkEndTime = System.nanoTime();
+            double executingTime = TimeUnit.NANOSECONDS.toNanos(benchmarkEndTime - startTime);
+            System.out.println(executingTime / 1000000000 + " seconds");
+        }
+      */
+
+      /*
+      FindExtremaApplication.run(
+                x -> x * x * FastMath.log(x),
+                0.2,
+                0.8,
+                1e-4
+        );
+        */
 
     }
 }

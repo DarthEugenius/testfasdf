@@ -6,6 +6,8 @@ import java.util.Set;
 
 /**
  * @param <A> typed parameter.
+ * @author Evgeniy Ternovoy
+ * @author Mihail Goncharov
  * @version 1.0
  */
 public abstract class TypedClassesCollector<A> implements Collector<Class<? extends A>, Class<A>> {

@@ -2,6 +2,7 @@ package interpolation_method;
 
 import entity.UniVariableRealFunction;
 import entity.UniVariableRealFunctionInterpolator;
+import org.apache.commons.math3.util.FastMath;
 
 public abstract class AbstractInterpolator
         implements UniVariableRealFunctionInterpolator {
@@ -17,7 +18,7 @@ public abstract class AbstractInterpolator
         DEFAULT_AMOUNTS_OF_SEGMENTS = defaultAmountsOfSegments;
     }
 
-    public int DEFAULT_AMOUNTS_OF_SEGMENTS = 1000;
+    public static int DEFAULT_AMOUNTS_OF_SEGMENTS = 1000;
 
     public int getAmountOfNodes() {
         return amountOfNodes;
@@ -41,13 +42,13 @@ public abstract class AbstractInterpolator
 
     public double[] calculateDifferenceBetweenFunctionAndInterpolation() {
 
-            double[] differenceBetweenFunctionAndInterpolation = new double[amountOfNodes];
-            for (int i = 0; i < nodes.length; i++) {
-                differenceBetweenFunctionAndInterpolation[i] = Math.abs(valuesOfFunctionInNodes[i]
-                        - resultFunction.value(nodes[i]));
-            }
-            this.differenceBetweenFunctionAndInterpolation = differenceBetweenFunctionAndInterpolation;
-            return differenceBetweenFunctionAndInterpolation;
+        double[] differenceBetweenFunctionAndInterpolation = new double[amountOfNodes];
+        for (int i = 0; i < nodes.length; i++) {
+            differenceBetweenFunctionAndInterpolation[i] = FastMath.abs(valuesOfFunctionInNodes[i]
+                    - resultFunction.value(nodes[i]));
+        }
+        this.differenceBetweenFunctionAndInterpolation = differenceBetweenFunctionAndInterpolation;
+        return differenceBetweenFunctionAndInterpolation;
 
     }
 

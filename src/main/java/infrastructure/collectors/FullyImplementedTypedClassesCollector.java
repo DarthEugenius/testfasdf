@@ -6,7 +6,8 @@ import java.util.stream.Collectors;
 
 /**
  * An infrastructural collector class.
- *
+ * @author Evgeniy Ternovoy
+ * @author Mihail Goncharov
  * @version 1.0
  */
 public class FullyImplementedTypedClassesCollector<T> extends TypedClassesCollector<T> {

@@ -3,11 +3,11 @@ package running;
 import entity.UniVariableRealFunction;
 import entity.UniVariableRealFunctionIntegrator;
 import infrastructure.factories.AllInheritedClassesInstancesFactory;
+import org.apache.commons.math3.util.FastMath;
 import processors.methods.MethodProcessor;
 
 import java.util.List;
 
-/// FIXME pls
 public class IntegrationApplication {
 
     private static final AllInheritedClassesInstancesFactory factory = new AllInheritedClassesInstancesFactory();
@@ -28,19 +28,19 @@ public class IntegrationApplication {
             processors.forEach(MethodProcessor::processBeforeMethodInvocation);
             double firstResult = integrator.integrate(segments, function, integrateFrom, integrateTo);
             System.out.printf("Integral value(%d segments): %.20f \n", segments, firstResult);
-            System.out.printf("error: %.20f \n", Math.abs(firstResult-INTEGRAL_VALUE));
+            System.out.printf("error: %.20f \n", FastMath.abs(firstResult-INTEGRAL_VALUE));
             processors.forEach(MethodProcessor::processAfterMethodInvocation);
 
             processors.forEach(MethodProcessor::processBeforeMethodInvocation);
             double secondResult = integrator.integrate(segments * 2, function, integrateFrom, integrateTo);
             System.out.printf("Integral value(%d segments): %.20f \n", segments * 2, secondResult);
-            System.out.printf("error: %.20f \n", Math.abs(secondResult-INTEGRAL_VALUE));
+            System.out.printf("error: %.20f \n", FastMath.abs(secondResult-INTEGRAL_VALUE));
             processors.forEach(MethodProcessor::processAfterMethodInvocation);
 
             processors.forEach(MethodProcessor::processBeforeMethodInvocation);
             double thirdResult = integrator.integrate(segments * 4, function, integrateFrom, integrateTo);
             System.out.printf("Integral value(%d segments): %.20f \n", segments * 4, thirdResult);
-            System.out.printf("error: %.20f \n", Math.abs(thirdResult-INTEGRAL_VALUE));
+            System.out.printf("error: %.20f \n", FastMath.abs(thirdResult-INTEGRAL_VALUE));
             processors.forEach(MethodProcessor::processAfterMethodInvocation);
 
             System.out.println();

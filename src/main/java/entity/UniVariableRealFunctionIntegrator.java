@@ -3,6 +3,8 @@ package entity;
 /**
  * A root interface for each integrator.
  *
+ * @author Evgeniy Ternovoy
+ * @author Mihail Goncharov
  * @version 1.0
  */
 public interface UniVariableRealFunctionIntegrator {

@@ -2,6 +2,7 @@ package find_zeros_method;
 
 import entity.UniVariableRealFunction;
 import entity.UniVariableRealFunctionZeroFinder;
+import org.apache.commons.math3.util.FastMath;
 
 public class SecantMethod extends IterationsCounter
         implements UniVariableRealFunctionZeroFinder {
@@ -13,7 +14,7 @@ public class SecantMethod extends IterationsCounter
                            double epsilon
     ) {
         int amountOfIterations = 0;
-        while(Math.abs(endOfSegment - startOfSegment) > epsilon) {
+        while(FastMath.abs(endOfSegment - startOfSegment) > epsilon) {
             startOfSegment =
                     endOfSegment -
                     (endOfSegment - startOfSegment) * function.value(endOfSegment) /

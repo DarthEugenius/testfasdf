@@ -3,6 +3,8 @@ package infrastructure.factories;
 /**
  * A factory interface.
  *
+ * @author Evgeniy Ternovoy
+ * @author Mihail Goncharov
  * @version 1.0
  */
 public interface InstanceCreator {

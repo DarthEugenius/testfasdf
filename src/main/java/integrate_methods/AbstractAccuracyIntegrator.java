@@ -2,6 +2,7 @@ package integrate_methods;
 
 import entity.UniVariableRealFunction;
 import entity.UniVariableRealFunctionIntegrator;
+import org.apache.commons.math3.util.FastMath;
 
 public abstract class AbstractAccuracyIntegrator implements UniVariableRealFunctionIntegrator {
 
@@ -21,7 +22,7 @@ public abstract class AbstractAccuracyIntegrator implements UniVariableRealFunct
         int counter = iterations;
         double previousIntegralValue = integrate(counter, function, integrateFrom, integrateTo);
         double currentIntegralValue = integrate(2 * counter, function, integrateFrom, integrateTo);
-        while (Math.abs(
+        while (FastMath.abs(
                         currentIntegralValue
                         -
                         previousIntegralValue)

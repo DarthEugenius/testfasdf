@@ -1,12 +1,14 @@
 package interpolation_method;
 
 import entity.UniVariableRealFunction;
+import org.apache.commons.math3.util.FastMath;
 import solve_system_of_linear_equations.GaussMethodDoubleImpl;
 import util.Utils;
 
 
 public class LeastSquaresMethod extends AbstractInterpolator {
-    public static final int power = 4;
+    // TODO
+    public static final int POWER = 4;
 
 
     @Override
@@ -14,30 +16,40 @@ public class LeastSquaresMethod extends AbstractInterpolator {
                                 double startOfSegment,
                                 double endOfSegment,
                                 int amountOfNodes) {
-        this.amountOfNodes = amountOfNodes;
         this.nodes = Utils.getArrayOfArguments(
                 startOfSegment,
                 endOfSegment,
-                amountOfNodes);
-        double[] xOriginal = Utils.getArrayOfArguments(
-                startOfSegment,
-                endOfSegment,
-                DEFAULT_AMOUNTS_OF_SEGMENTS);
-        this.valuesOfArgument = xOriginal;
-        double[][] A = new double[power][power];
-        double[] B = new double[power];
-        this.valuesOfFunctionInNodes =
+                amountOfNodes
+        );
+        return interpolate(
                 Utils.getArrayOfValuesOfUniVariableRealFunction(
                         function,
-                        nodes);
-        for (int i = 0; i < power; i++) {
-            for (int j = 0; j < power; j++) {
+                        this.nodes
+                ),
+                this.nodes
+        );
+    }
+
+    @Override
+    public double[] interpolate(
+            double[] valuesOfFunction,
+            double[] valuesOfArgument) {
+        double[] xOriginal = Utils.getArrayOfArguments(
+                valuesOfArgument[0],
+                valuesOfArgument[valuesOfArgument.length - 1],
+                DEFAULT_AMOUNTS_OF_SEGMENTS);
+        this.valuesOfFunctionInNodes = valuesOfFunction;
+        this.valuesOfArgument = xOriginal;
+        double[][] A = new double[POWER][POWER];
+        double[] B = new double[POWER];
+        for (int i = 0; i < POWER; i++) {
+            for (int j = 0; j < POWER; j++) {
                 for (double v : nodes) {
-                    A[i][j] += Math.pow(v, i + j);
+                    A[i][j] += FastMath.pow(v, i + j);
                 }
             }
             for (int j = 0; j < nodes.length; j++) {
-                B[i] += valuesOfFunctionInNodes[j] * Math.pow(nodes[j], i);
+                B[i] += valuesOfFunction[j] * FastMath.pow(nodes[j], i);
             }
         }
         GaussMethodDoubleImpl gaussMethodDouble =
@@ -45,23 +57,18 @@ public class LeastSquaresMethod extends AbstractInterpolator {
                         A,
                         B,
                         true);
-        double[] solution = gaussMethodDouble.solve();
-        this.resultFunction =
-                argument -> solution[0]
-                        + argument * solution[1]
-                        + Math.pow(argument, 2) * solution[2]
-                        + Math.pow(argument, 3) * solution[3];
+        double[] solutionCoefficients = gaussMethodDouble.solve();
+        this.resultFunction = x -> {
+            double result = 0.0;
+            for (int i = 0; i < solutionCoefficients.length; i++) {
+                result += solutionCoefficients[i] * FastMath.pow(x, i);
+            }
+            return result;
+        };
         this.valuesOfInterpolatedFunction =
                 Utils.getArrayOfValuesOfUniVariableRealFunction(
                         resultFunction,
                         xOriginal);
         return this.valuesOfInterpolatedFunction;
-    }
-
-    @Override
-    public double[] interpolate(
-            double[] valuesOfFunction,
-            double[] valuesOfArgument) {
-        return new double[0];
     }
 }

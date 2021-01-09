@@ -7,6 +7,8 @@ import java.util.Set;
  *
  * @param <C> type of collected entities.
  * @param <A> type of attribute.
+ * @author Evgeniy Ternovoy
+ * @author Mihail Goncharov
  * @version 1.0
  */
 public interface Collector<C, A> {

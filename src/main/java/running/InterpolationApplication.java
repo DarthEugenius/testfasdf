@@ -3,6 +3,7 @@ package running;
 import entity.UniVariableRealFunction;
 import infrastructure.factories.AllInheritedClassesInstancesFactory;
 import interpolation_method.AbstractInterpolator;
+import org.apache.commons.math3.util.FastMath;
 import org.knowm.xchart.*;
 import org.knowm.xchart.style.markers.SeriesMarkers;
 import util.Utils;
@@ -66,7 +67,7 @@ public class InterpolationApplication {
                 mWriter.write(LatexOutputUtil.headOfTable);
                 for (int i = 0; i < amountOfNodes - 1; i++) {
                     double argument = (uniVariableRealFunctionInterpolator.getNodes()[i] + uniVariableRealFunctionInterpolator.getNodes()[i + 1]) / 2;
-                    differences[i] = Math.abs(function.value(argument)
+                    differences[i] = FastMath.abs(function.value(argument)
                             - uniVariableRealFunctionInterpolator.resultFunction.value(argument));
                     sumOfDifferences += differences[i];
                     sumOfMSE += differences[i]*differences[i];

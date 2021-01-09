@@ -1,6 +1,8 @@
 package solve_system_of_linear_equations;
 
 
+import org.apache.commons.math3.util.FastMath;
+
 /**
  *
  */
@@ -62,7 +64,7 @@ public final class GaussMethodDoubleImpl {
         }
         int maxIndex = column;
         for (int i = column + 1; i < aMatrix.length; i++) {
-            if (Math.abs(aMatrix[i][column]) > Math.abs(aMatrix[maxIndex][column])) maxIndex = i;
+            if (FastMath.abs(aMatrix[i][column]) > FastMath.abs(aMatrix[maxIndex][column])) maxIndex = i;
         }
         return maxIndex;
     }

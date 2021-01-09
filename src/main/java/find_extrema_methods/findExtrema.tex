@@ -1,0 +1,243 @@
+\documentclass[a4paper,12pt]{extarticle}
+% !TEX encoding = IBM866
+\usepackage[T2A]{fontenc}
+\usepackage{listings}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{algorithm2e}
+\usepackage{array}
+\usepackage{moreverb}
+\usepackage{multirow}
+
+\usepackage[russian]{babel}
+\usepackage{amsthm,amsmath,amsfonts,amssymb}
+\usepackage[final]{graphicx}
+\usepackage{float}
+\usepackage{geometry}
+\geometry
+{
+a4paper,
+total={210mm,297mm},
+left=20mm,
+right=20mm,
+top=25mm,
+bottom=20mm,
+}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage[final]{showkeys}
+
+\usepackage{caption}
+\DeclareCaptionLabelSeparator{dot}{. }
+\captionsetup{labelsep=dot}
+
+\usepackage{hyperref}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+
+
+
+\begin{document}
+
+
+    \begin{titlepage}
+
+        \begin{center}
+            \centerline{\Large\rm Министерство науки и высшего образования}
+            \centerline{\Large\rm Федеральное государственное бюджетное образовательное}
+            \centerline{\Large\rm учреждение высшего образования}
+            \centerline{\Large\rm <<Московский государственный технический университет}
+            \centerline{\Large\rm имени~Н.~Э.~Баумана}
+            \centerline{\Large\rm (национальный исследовательский университет)>>}
+            \centerline{\Large\rm (МГТУ~им.~Н.~Э.~Баумана)}
+            \hrulefill
+        \end{center}
+
+        \begin{figure}[h!]
+            \centering
+            \includegraphics[height=0.4\linewidth]{picture0}
+        \end{figure}
+
+        \begin{center}
+            \centerline{\Large\rm Факультет <<Фундаментальные науки>>}
+            \centerline{\Large\rm Кафедра ФН1 <<Высшая математика>>}
+            \centerline{\Large\rm Дисциплина <<Методы оптимизации и вариационное исчисление>>}
+        \end{center}
+
+        \begin{center}
+            \textsc{\textbf{\Huge Отчет}}\\
+            \textsc{\textbf{\large по лабораторным работам №1--2}}\\
+            \textsc{\textbf{\large Вариант 19}}\\
+        \end{center}
+
+        \vspace{3em}
+
+        {
+        \large
+        \hbox to 17cm {Преподаватель \hspace{45pt} \hrulefill \hspace{75pt} Васильев~Н.~С.}
+        \vspace{-7pt}
+        \hbox{{\small\it \hspace{178pt} подпись, инициалы}}
+        \hbox{}
+        \hbox to 17cm {Студент группы ФН1--51Б \hrulefill \hspace{95pt} Терновой~Е.~А.}
+        \vspace{-7pt}
+        \hbox{{\small\it \hspace{178pt} подпись, инициалы}}
+        }
+
+
+        \vspace{\fill}
+
+        \begin{center}
+            \large	Москва \\2020
+        \end{center}
+
+    \end{titlepage}
+
+    \setcounter{page}{2}
+    \tableofcontents
+    \vspace{\baselineskip}
+
+    \newpage
+    \section{Задание}
+
+    \subsection{Лабораторная работа №1}
+    Найти приближённое значение точки экстремума функции $f(x)$ с точностью с
+    $\varepsilon = 0.001$ при помощи следующих численных методов оптимизации:
+
+    \begin{enumerate}
+        \item деление отрезка пополам
+        \item золотое сечение
+    \end{enumerate}
+
+    \[
+        f(x) = x^2 \cdot \log x
+    \]
+
+    Также провести сравнительный анализ скоростей сходимости методов.
+
+    \subsection{Лабораторная работа №2}
+    Найти приближённое значение глобальной точки экстремума функции $f(x)$
+    с точностью $\varepsilon = 0.001$ при помощи следующих численных методов:
+
+    \begin{enumerate}
+        \item метод секущих
+        \item метод касательных
+    \end{enumerate}
+
+    \[
+        f(x) = x^2 \cdot \log x
+    \]
+
+    Провести сравнительный анализ скоростей сходимости методов. Представить таблично результаты первых $n=10$ итераций.
+
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[height=0.5\linewidth]{extrema.png}
+        \caption{График исследуемой функции}
+    \end{figure}
+
+    \newpage
+    \section{Код программы}
+
+    \subsection{Деление отрезка пополам}
+    \listinginput[1]{1}{SegmentDichotomyMethod.java}
+
+    \newpage
+    \subsection{Золотое сечение}
+    \listinginput[1]{1}{GoldenRatioMethod.java}
+
+    \newpage
+    \subsection{Метод секущих}
+    \listinginput[1]{1}{SecantMethod.java}
+
+    \newpage
+    \subsection{Метод касательных}
+    \listinginput[1]{1}{TangentsMethod.java}
+
+    \newpage
+    \section{Результаты работы программы}
+
+    \subsection{Поиск локального минимума функции на отрезке $[0.2; 0.8]$}
+
+    \begin{center}
+        \begin{tabular}{ |c|c|c|c|c| }
+            \hline
+            Метод & $\varepsilon$ & $f(x_{min})$ & $x_{min}(n)$ & $\Delta t$, с \\
+            \hline
+            \multirow{10}{9em}{\centerline{Дихотомия отрезка}} & \multirow{10}{5em}{\centerline{$0.001$}} 		  & \multirow{10}{10em}{\centerline{$-0.18393972058571076$}} &  		       $0.5$ & \multirow{10}{5em}{\centerline{$6.2\cdot10^{-4}$}} \\
+            &  		  &  & $0.65$ &  \\
+            &  		  &  & $0.575$ &  \\
+            & 		  &  & $0.6125$ &  \\
+            &  		  &  & $0.59375$ &  \\
+            &  		  &  & $0.603125$ &  \\
+            &  		  &  & $0.6078125$ &  \\
+            & 		  &  & $0.60546875$ &  \\
+            &  		  &  & $0.606640625$ &  \\
+            &  		  &  & $0.6060546875$ &  \\
+            \hline
+        \end{tabular}
+    \end{center}
+
+    \begin{center}
+        \begin{tabular}{ |c|c|c|c|c| }
+            \hline
+            Метод & $\varepsilon$ & $f(x_{min})$ & $x_{min}(n)$ & $\Delta t$, с \\
+            \hline
+            \multirow{10}{9em}{\centerline{Золотое сечение}} & \multirow{10}{5em}{\centerline{$0.001$}} 		  & \multirow{10}{10em}{\centerline{$-0.18393972058067223$}} &  		       $0.685$ & \multirow{10}{5em}{\centerline{$9.3\cdot10^{-4}$}} \\
+            &  		  &  & $0.6145898033750316$ &  \\
+            &  		  &  & $0.5437694101250946$ &  \\
+            & 		  &  & $0.5875388202501892$ &  \\
+            &  		  &  & $0.6145898033750316$ &  \\
+            &  		  &  & $0.5978713763747792$ &  \\
+            &  		  &  & $0.6082039324993691$ &  \\
+            & 		  &  & $0.6018180616237067$ &  \\
+            &  		  &  & $0.6057647468726342$ &  \\
+            &  		  &  & $0.6082039324993691$ &  \\
+            \hline
+        \end{tabular}
+    \end{center}
+
+
+    \newpage
+    \subsection{Поиск глобального минимума функции}
+
+
+
+    \begin{center}
+        \begin{tabular}{ |c|c|c|c|c| }
+            \hline
+            Метод & $\varepsilon$ & $f(x_{min})$ & $x_{min}(n)$ & $\Delta t$, с \\
+            \hline
+            \multirow{10}{9em}{\centerline{Секущие}} & \multirow{10}{5em}{\centerline{$0.001$}} 		  & \multirow{10}{10em}{\centerline{$-0.18393971733439896$}} &  		       $0.8$ & \multirow{10}{5em}{\centerline{$2.2\cdot 10^{-3}$}} \\
+            &  		  &  & $0.42542535207764953$ &  \\
+            & 		  &  & $0.7680207566862691$ &  \\
+            &  		  &  & $0.47640742836957034$ &  \\
+            &  		  &  & $0.7034657841103225$ &  \\
+            &  		  &  & $0.5327556052144047$ &  \\
+            & 		  &  & $0.6602655418137091$ &  \\
+            &  		  &  & $0.5665278962134683$ &  \\
+            &  		  &  & $0.6356424217273487$ &  \\
+            &  		  &  & $0.5850549285073281$ &  \\
+            \hline
+        \end{tabular}
+    \end{center}
+
+    \begin{center}
+        \begin{tabular}{ |c|c|c|c|c| }
+            \hline
+            Метод & $\varepsilon$ & $f(x_{min})$ & $x_{min}(n)$ & $\Delta t$, с \\
+            \hline
+            \multirow{4}{9em}{\centerline{Касательные}} & \multirow{4}{5em}{\centerline{$0.001$}} 		  & \multirow{4}{10em}{\centerline{$-0.18393972043398207$}} &  		       $0.6043034949999999$ & \multirow{4}{5em}{\centerline{$7.6\cdot 10^{-4}$}} \\
+            &  		  &  & $0.6065919064285713$ &  \\
+            & 		  &  & $0.6065183414285713$ &  \\
+            &  		  &  & $0.6065183414285713$ & \\
+            \hline
+        \end{tabular}
+    \end{center}
+
+    \vspace{1in}
+    \centering{\LaTeX}
+
+\end{document}
+
+
+
