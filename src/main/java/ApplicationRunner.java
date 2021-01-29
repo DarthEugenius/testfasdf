@@ -1,13 +1,12 @@
 import org.apache.commons.math3.util.FastMath;
-import running.ApproximateApplication;
+import running.DifferentialEquationsApplication;
 
 public class ApplicationRunner {
 
     public static void main(String[] args) {
-        /*
         DifferentialEquationsApplication.run(
                 // dy/dx = f(x, y) =
-                (x, y) -> x * x - y * y,
+                (x, y) -> -2 * x * y + x * FastMath.exp(-x * x),
 
                 // x_0 =
                 0,
@@ -16,24 +15,23 @@ public class ApplicationRunner {
                 1,
 
                 // x1 =
-                0.5,
+                2,
 
                 // h =
-                0.01
+                0.1
         );
-        */
+        
 
-        ApproximateApplication.run(
-                (x) -> FastMath.sqrt(2 * x + 1) - FastMath.sin(5 * x - FastMath.PI / 6),
-                -0.5,
-                5,
-                7
-        );
+        /*ApproximateApplication.run(
+                (x) -> FastMath.sqrt(9 * x - 2) - FastMath.sin( 3* x + FastMath.PI / 3),
+                1,
+                15,
+                20
+        );*/
 
-        /*
-        for (int i = 0; i < 1; i++) {
+        /*for (int i = 0; i < 1; i++) {
             long startTime = System.nanoTime();
-            new LagrangeInterpolation().interpolate(
+            new LagrangeInterpolation().approximate(
                     x -> FastMath.sqrt(2 * x + 1) - FastMath.sin(5 * x - FastMath.PI / 6),
                     0,
                     5,
@@ -42,8 +40,7 @@ public class ApplicationRunner {
             long benchmarkEndTime = System.nanoTime();
             double executingTime = TimeUnit.NANOSECONDS.toNanos(benchmarkEndTime - startTime);
             System.out.println(executingTime / 1000000000 + " seconds");
-        }
-      */
+        }*/
 
       /*
       FindExtremaApplication.run(
@@ -53,6 +50,12 @@ public class ApplicationRunner {
                 1e-4
         );
         */
+        /*FindZerosOfUniVariableRealFunctionApplication.run(
+                x -> FastMath.exp(x) + FastMath.cos(x),
+                -FastMath.PI,
+                -FastMath.PI/2,
+                1e-5
+        );*/
 
     }
 }

@@ -43,7 +43,7 @@ public class ApproximateApplication {
             double[] arrayOfValuesOfUniVariableRealFunction = Utils.getArrayOfValuesOfUniVariableRealFunction(
                     function,
                     arrayOfArguments);
-            String plotName = "src\\main\\java\\interpolation_method\\"+uniVariableRealFunctionInterpolator.getClass().getSimpleName() + amountOfNodes + "Nodes";
+            String plotName = "src\\main\\java\\interpolation_method\\" + uniVariableRealFunctionInterpolator.getClass().getSimpleName() + amountOfNodes + "Nodes";
             XYChart chart = new XYChartBuilder()
                     .width(900)
                     .height(600)
@@ -65,12 +65,16 @@ public class ApproximateApplication {
                 double sumOfDifferences = 0.0;
                 double sumOfMSE = 0.0;
                 mWriter.write(LatexOutputUtil.headOfTable);
+                double maxAbs = 0.0;
                 for (int i = 0; i < amountOfNodes - 1; i++) {
                     double argument = (uniVariableRealFunctionInterpolator.getNodes()[i] + uniVariableRealFunctionInterpolator.getNodes()[i + 1]) / 2;
                     differences[i] = FastMath.abs(function.value(argument)
                             - uniVariableRealFunctionInterpolator.resultFunction.value(argument));
+                    if (differences[i] > maxAbs) {
+                        maxAbs = differences[i];
+                    }
                     sumOfDifferences += differences[i];
-                    sumOfMSE += differences[i]*differences[i];
+                    sumOfMSE += differences[i] * differences[i];
                     String currentRow = argument +
                             " & " +
                             function.value(argument) +
@@ -81,6 +85,7 @@ public class ApproximateApplication {
                             "\\\\ \\hline \n";
                     mWriter.write(currentRow);
                 }
+                System.out.println(maxAbs);
                 mWriter.write(LatexOutputUtil.endOfTable);
                 mWriter.write("\\centering\n" +
                         "\\begin{tabular}{|l|l|}\n" +
@@ -89,17 +94,24 @@ public class ApproximateApplication {
                         "\\hline\n" +
                         sumOfDifferences / (amountOfNodes - 1) +
                         " & " +
-                        sumOfMSE / (amountOfNodes - 1)  +
+                        sumOfMSE / (amountOfNodes - 1) +
                         "\\\\ \n" +
                         "            \\hline\n" +
-                        "        \\end{tabular}"+
+                        "        \\end{tabular}" +
                         "\\end{table}");
                 mWriter.close();
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            XYSeries interpolatedSeries = chart.addSeries("result of approximation",
+            XYSeries xySeries = chart.addSeries(
+                    "sqrt(9x-2)",
+                    arrayOfArguments,
+                    Utils.getArrayOfValuesOfUniVariableRealFunction(x -> FastMath.sqrt(9 * x - 2),
+                            arrayOfArguments));
+            xySeries.setMarker(SeriesMarkers.NONE);
+            XYSeries interpolatedSeries = chart.addSeries(
+                    "result of approximation",
                     uniVariableRealFunctionInterpolator.getValuesOfArgument(),
                     uniVariableRealFunctionInterpolator.getValuesOfInterpolatedFunction());
             interpolatedSeries.setMarker(SeriesMarkers.NONE);

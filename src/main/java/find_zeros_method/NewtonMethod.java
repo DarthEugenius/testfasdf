@@ -6,7 +6,7 @@ import org.apache.commons.math3.util.FastMath;
 
 public class NewtonMethod extends IterationsCounter
         implements UniVariableRealFunctionZeroFinder {
-    final static double INCREMENT_OF_ARGUMENT = 1e-15;
+    final static double INCREMENT_OF_ARGUMENT = 1e-8;
 
     double derivativeAtPoint(UniVariableRealFunction function, double x) {
         double incrementOfFunction =

@@ -1,6 +1,5 @@
 package running;
 
-import com.sun.prism.BasicStroke;
 import entity.CauchyProblemSolver;
 import entity.TwoVariablesRealFunction;
 import infrastructure.factories.AllInheritedClassesInstancesFactory;

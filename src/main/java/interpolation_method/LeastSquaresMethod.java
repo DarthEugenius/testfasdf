@@ -8,7 +8,7 @@ import util.Utils;
 
 public class LeastSquaresMethod extends AbstractApproximator {
     // TODO
-    public static final int POWER = 4;
+    public static final int POWER = 5;
 
 
     @Override
