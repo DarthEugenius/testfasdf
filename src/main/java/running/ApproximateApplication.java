@@ -18,7 +18,7 @@ public class ApproximateApplication {
     private static final AllInheritedClassesInstancesFactory factory = new AllInheritedClassesInstancesFactory();
     private static final int AMOUNT_OF_SEGMENTS_PLOTS = 10000;
 
-    private static final List<AbstractApproximator> INTERPOLATORS = factory
+    private static final List<AbstractApproximator> APPROXIMATORS = factory
             .getClassesInstancesBySuperClassOrInterface(AbstractApproximator.class);
 
     public static void run(
@@ -27,7 +27,7 @@ public class ApproximateApplication {
             double endOfSegment,
             int amountOfNodes
     ) {
-        INTERPOLATORS.forEach(uniVariableRealFunctionInterpolator -> {
+        APPROXIMATORS.forEach(uniVariableRealFunctionInterpolator -> {
             long startTime = System.nanoTime();
             uniVariableRealFunctionInterpolator.approximate(
                     function,

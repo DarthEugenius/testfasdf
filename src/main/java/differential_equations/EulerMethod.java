@@ -1,9 +1,9 @@
 package differential_equations;
 
-import entity.CauchyProblemSolver;
+import entity.CauchyProblemFirstOrderSolver;
 import entity.TwoVariablesRealFunction;
 
-public class EulerMethod implements CauchyProblemSolver {
+public class EulerMethod implements CauchyProblemFirstOrderSolver {
 
     @Override
     public int getOrder() {

@@ -1,9 +1,9 @@
 package differential_equations;
 
-import entity.CauchyProblemSolver;
+import entity.CauchyProblemFirstOrderSolver;
 import entity.TwoVariablesRealFunction;
 
-public class RungeKuttaMethodFourthOrder implements CauchyProblemSolver {
+public class RungeKuttaMethodFourthOrder implements CauchyProblemFirstOrderSolver {
 
     @Override
     public String toString() {

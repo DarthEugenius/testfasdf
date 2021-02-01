@@ -1,12 +1,11 @@
 package running;
 
-import entity.CauchyProblemSolver;
+import entity.CauchyProblemFirstOrderSolver;
 import entity.TwoVariablesRealFunction;
 import infrastructure.factories.AllInheritedClassesInstancesFactory;
 import org.apache.commons.math3.util.FastMath;
 import org.knowm.xchart.*;
 import org.knowm.xchart.style.Styler;
-import org.knowm.xchart.style.markers.Marker;
 import org.knowm.xchart.style.markers.SeriesMarkers;
 import util.Utils;
 
@@ -19,8 +18,8 @@ import java.util.concurrent.TimeUnit;
 public class DifferentialEquationsApplication {
     private static final AllInheritedClassesInstancesFactory FACTORY = new AllInheritedClassesInstancesFactory();
 
-    private static final List<CauchyProblemSolver> CAUCHY_PROBLEM_SOLVERS = FACTORY
-            .getClassesInstancesBySuperClassOrInterface(CauchyProblemSolver.class);
+    private static final List<CauchyProblemFirstOrderSolver> CAUCHY_PROBLEM_SOLVERS = FACTORY
+            .getClassesInstancesBySuperClassOrInterface(CauchyProblemFirstOrderSolver.class);
 
     public static void run(
             TwoVariablesRealFunction derivative,
@@ -117,10 +116,9 @@ public class DifferentialEquationsApplication {
         }
 
 
-
-
     }
-    class DiffLatexOutputUtil {
+
+    static class DiffLatexOutputUtil {
         public static final String headOfTable = "\\begin{table}[H]\n" +
                 "        \\centering\n" +
                 "        \\begin{tabular}{|l|l|}\n" +

@@ -45,7 +45,7 @@ public class Utils {
         double[] x = new double[amountOfSegments + 1];
         x[0] = startOfSegment;
         for (int i = 1; i <= amountOfSegments; i++) {
-            x[i] = x[i - 1] + step;
+            x[i] = startOfSegment + i * step;
         }
         return x;
     }

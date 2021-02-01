@@ -1,10 +1,10 @@
 package differential_equations;
 
-import entity.CauchyProblemSolver;
+import entity.CauchyProblemFirstOrderSolver;
 import entity.TwoVariablesRealFunction;
 import org.apache.commons.math3.util.FastMath;
 
-public class RungeKuttaMethodSixthOrder implements CauchyProblemSolver {
+public class RungeKuttaMethodSixthOrder implements CauchyProblemFirstOrderSolver {
     public static final double d = FastMath.sqrt(21);
 
     @Override

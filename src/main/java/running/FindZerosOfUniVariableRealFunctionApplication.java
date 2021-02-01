@@ -19,9 +19,6 @@ public class FindZerosOfUniVariableRealFunctionApplication {
     private static final List<MethodProcessor> processors = factory.getClassesInstancesBySuperClassOrInterface(MethodProcessor.class);
 
 
-
-
-
     public static void run(
             UniVariableRealFunction function,
             double startOfSegment,
